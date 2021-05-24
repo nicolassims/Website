@@ -306,6 +306,11 @@ h6 { font-size: 16px; }
     margin: 0;
 }
 
+.post-subtitle {
+    color: darkgrey;
+    margin: 0;
+}
+
 .post-intro {
     color: #4b5156;
     font-size: 14px;
