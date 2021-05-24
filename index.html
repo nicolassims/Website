@@ -8,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@500&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="default.css">
-    <link id="theme-style" rel="stylesheet" type="text/css" href="styles/blue.css" />
+    <link id="theme-style" rel="stylesheet" type="text/css" href="styles/dark.css" />
 </head>
 <body>
     <section class="s1">
@@ -31,10 +31,10 @@
                     <img id="profile-pic" src="images/portrait.jpg" />
                     <h5 style="text-align: center; line-height: 0;">Select Theme</h5>
                     <div id="theme-options-wrapper">
-                        <div id="light-mode" class="theme-dot"></div>
-                        <div id="blue-mode" class="theme-dot"></div>
-                        <div id="green-mode" class="theme-dot"></div>
-                        <div id="purple-mode" class="theme-dot"></div>
+                        <div data-mode="light" id="light-mode" class="theme-dot"></div>
+                        <div data-mode="dark" id="dark-mode" class="theme-dot"></div>
+                        <div data-mode="green" id="green-mode" class="theme-dot"></div>
+                        <div data-mode="purple" id="purple-mode" class="theme-dot"></div>
                     </div>
                     <p id="settings-note">
                         *Theme settings will be saved for<br />your next visit.
@@ -145,5 +145,8 @@
             </form>
         </div>
     </section>
+
+    <script type="text/javascript" src="script.js"></script>
+
 </body>
 </html>
