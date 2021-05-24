@@ -7,7 +7,7 @@ if (!theme) {//if the user hasn't set a theme before...
 
 let themeDots = document.getElementsByClassName("theme-dot");//get all the theme-switching dot options
 for (var i = 0; i < themeDots.length; i++) {//for each 'dot that was got'...
-    themeDots[i].addEventListener('click', () => {//assign an event to trigger when clicked
+    themeDots[i].addEventListener('click', function() {//assign an event to trigger when clicked
         setTheme(this.dataset.mode);//and set the theme to the mode that was set in the index.html
     })
 }
