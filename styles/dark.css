@@ -4,8 +4,8 @@
     --borderColor: #164D56;
     --mainText: #fff;
     --secondaryText: #eeeeee;
-    --themeDotBorder: #24292e;
-    --previewBg: rgba(251, 249, 243, 0.8);
-    --previewShadow: #f0ead6;
-    --buttonColor: black;
+    --themeDotBorder: #fff;
+    --previewBg: rgba(25, 39, 52, 0.8);
+    --previewShadow: #111921;
+    --buttonColor: #17a2b8;
 }
