@@ -101,6 +101,7 @@ h6 { font-size: 16px; }
     align-items: center;
     background-color: var(--mainColor);
     border-radius: 5px 5px 0 0;
+    color: var(--secondaryText);
 }
 
 #navigation {
@@ -115,6 +116,11 @@ h6 { font-size: 16px; }
 
 .dots-wrapper {
     display: flex;
+    padding: 10px;
+}
+
+.prompt-wrapper {
+    display: none;
     padding: 10px;
 }
 
@@ -172,21 +178,35 @@ h6 { font-size: 16px; }
     border-width: 5px;
 }
 
-#light-mode {
+#crescent-moon {
+    position: relative;
+    top: 4.5px;
+    left: -2px;
+    height: 20px;
+    width: 20px;
     background-color: white;
+    border-radius: 50%;
 }
 
-#dark-mode {
-    background-color: #192734;
+#dark-mode-border {
+    background-color: transparent;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    top: -22px;
+    left: -2px;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+}
+#dark-mode-border:hover {
+    border-width: 2px;
 }
 
-#green-mode {
-    background-color: #78866b;
-}
-
-#purple-mode {
-    background-color: #7E4C74;
-}
+#light-mode { background-color: white; }
+#dark-mode { background-color: #192734; }
+#matrix-mode { background-color: #78866b; }
+#purple-mode { background-color: #7E4C74; }
 
 #settings-note {
     font-size: 12px;

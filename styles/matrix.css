@@ -1,0 +1,45 @@
+:root {
+    --mainColor: black;
+    --secondaryColor: black;
+    --borderColor: #00ff0f;
+    --mainText: #00ff0f;
+    --secondaryText: #00ff0f;
+    --themeDotBorder: #00ff0f;
+    --previewBg: rgba(0, 136, 8, 0.80);
+    --previewShadow: #00ff0f;
+    --buttonColor: #00ff0f;
+}
+
+#preview-shadow {
+    background-color: var(--previewShadow);
+}
+
+#preview {
+    border: 1.5px solid black;
+}
+
+#preview * {
+    color: black;
+}
+
+.corner {
+    border-radius: 0;
+    border: 1.5px solid black;
+    background-color: #00ff0f;
+}
+
+.dots-wrapper {
+    display: none;
+}
+
+.prompt-wrapper {
+    display: flex;
+}
+
+#blinker {
+    padding-left: 10px;
+}
+
+#skills li {
+    color: black;
+}
