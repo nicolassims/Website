@@ -1,11 +1,46 @@
-:root {
-    --mainColor: #15202B;
-    --secondaryColor: #192734;
-    --borderColor: #164D56;
-    --mainText: #fff;
-    --secondaryText: #eeeeee;
-    --themeDotBorder: #fff;
-    --previewBg: rgba(25, 39, 52, 0.8);
-    --previewShadow: #111921;
-    --buttonColor: #17a2b8;
+﻿:root {
+    --mainColor: #C7A575;
+    --secondaryColor: #D5B78B;
+    --borderColor: #B99566;
+    --mainText: #5e4d3b;
+    --secondaryText: #866C53;
+    --themeDotBorder: black;
+    --previewBg: rgba(230, 185, 140, 0.8);
+    --previewShadow: #5e4d3b;
+    --buttonColor: #5e4d3b;
+    --mainFont: 'Parisienne', cursive;
+    --secondaryFont: 'Merriweather', serif;
+}
+
+.dots-wrapper {
+    display: none;
+}
+
+.letter-wrapper {
+    display: flex;
+}
+
+h1, h2, h3, h4, h5, h6, strong {
+    font-weight: 600;
+}
+
+p, li, span, label, input, textarea {
+    font-weight: 500;
+}
+
+#preview {
+    border: 1.5px solid black;
+}
+
+.corner {
+    border: 1.5px solid black;
+    background-color: black;
+}
+
+#skills li {
+    color: #D5B78B;
+}
+
+.post-subtitle {
+    font-family: var(--secondaryFont);
 }

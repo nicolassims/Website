@@ -9,6 +9,8 @@
     --previewShadow: #f0ead6;
     --buttonColor: black;
     --roundEdge: 50%;
+    --mainFont: 'Russo One', sans-serif;
+    --secondaryFont: 'Roboto Mono', monospace;
 }
 
 html, body {
@@ -22,16 +24,17 @@ body * {
 
 h1, h2, h3, h4, h5, h6, strong {
     color: var(--mainText);
-    font-family: 'Russo One', sans-serif;
+    font-family: var(--mainFont);
     font-weight: 500;
 }
 
 p, li, span, label, input, textarea {
     color: var(--secondaryText);
-    font-family: 'Roboto Mono', monospace;
+    font-family: var(--secondaryFont);
 }
 
 a {
+    font-family: var(--secondaryFont);
     text-decoration: none;
     color: #17a2b8;
 }
@@ -97,7 +100,7 @@ h6 { font-size: 16px; }
     color: var(--secondaryText);
 }
 
-#navigation {
+/*#navigation {
     margin: 0;
     padding: 10px;
 }
@@ -105,7 +108,7 @@ h6 { font-size: 16px; }
 #navigation li {
     display: inline-block;
     margin: 0px 5px;
-}
+}*/
 
 .dots-wrapper {
     display: flex;
@@ -115,6 +118,15 @@ h6 { font-size: 16px; }
 .prompt-wrapper {
     display: none;
     padding: 10px;
+}
+
+.letter-wrapper {
+    display: none;
+    padding: 10px;
+}
+
+.letter-wrapper h5 {
+    margin: 0;
 }
 
 #dot-1 { background-color: #FC6058; }
@@ -198,7 +210,7 @@ h6 { font-size: 16px; }
 #light-mode { background-color: white; }
 #dark-mode { background-color: #192734; }
 #matrix-mode { background-color: black; }
-#paper-mode { background-color: #7E4C74; }
+#paper-mode { background-color: #C7A575; }
 
 #pixel {
     background-color: #00ff0f;

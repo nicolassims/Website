@@ -1,4 +1,4 @@
-let theme = localStorage.getItem('theme');//get the previously-stored theme, returning "Null" if none can be found.
+﻿let theme = localStorage.getItem('theme');//get the previously-stored theme, returning "Null" if none can be found.
 if (!theme) {//if the user hasn't set a theme before...
     setTheme('light');//set the light theme by default
 } else {//otherwise...
@@ -19,6 +19,8 @@ function setTheme(mode) {
         document.getElementById('theme-style').href = 'styles/' + mode + '.css';//assign the corresponding css style
     }
     localStorage.setItem('theme', mode);//and set that css style for future visits.
+
+    document.getElementById('settings-note').innerHTML = "✒ These settings will be saved for you!"
 }
 
 let pw = document.querySelector('.post-wrapper');//get the post-wrapper element, which is the parent of all the posts...
