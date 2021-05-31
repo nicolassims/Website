@@ -1,18 +1,14 @@
 :root {
     --mainColor: #eaeaea;
     --secondaryColor: white;
-
     --borderColor: #c1c1c1;
-
     --mainText: black;
     --secondaryText: #4b5156;
-
     --themeDotBorder: #24292e;
-
     --previewBg: rgba(251, 249, 243, 0.8);
     --previewShadow: #f0ead6;
-
     --buttonColor: black;
+    --roundEdge: 50%;
 }
 
 html, body {
@@ -78,19 +74,16 @@ h6 { font-size: 16px; }
 .intro-wrapper {
     background-color: var(--secondaryColor);
     border: 1px solid var(--borderColor);
+    border-bottom: none;
     border-radius: 5px 5px 0 0;
-
-
     -webkit-box-shadow: -1px 1px 3px -1px rgba(0,0,0,0.75);
     -moz-box-shadow: -1px 1px 3px -1px rgba(0,0,0,0.75);
     box-shadow: -1px 1px 3px -1px rgba(0,0,0,0.75);
-    
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-areas: 
-        'nav-wrapper nav-wrapper'
-        'left-column right-column'
-    ;
+        'nav-wrapper nav-wrapper' 
+        'left-column right-column';
 }
 
 .nav-wrapper {
@@ -132,7 +125,7 @@ h6 { font-size: 16px; }
     background-color: black;
     height: 15px;
     width: 15px;
-    border-radius: 50%;
+    border-radius: var(--roundEdge);
     margin: 5px;
 
     -webkit-box-shadow: -1px 1px 3px -1px rgba(0,0,0,0.75);
@@ -163,14 +156,12 @@ h6 { font-size: 16px; }
     height: 30px;
     width: 30px;
     background-color: black;
-    border-radius: 50%;
+    border-radius: var(--roundEdge);
     margin: 5px;
     border: 2px solid var(--themeDotBorder);
-
     -webkit-box-shadow: -1px 1px 3px -1px rgba(0,0,0,0.75);
     -moz-box-shadow: -1px 1px 3px -1px rgba(0,0,0,0.75);
     box-shadow: -1px 1px 3px -1px rgba(0,0,0,0.75);
-
     cursor: pointer;
 }
 
@@ -185,7 +176,7 @@ h6 { font-size: 16px; }
     height: 20px;
     width: 20px;
     background-color: white;
-    border-radius: 50%;
+    border-radius: var(--roundEdge);
 }
 
 #dark-mode-border {
@@ -199,14 +190,24 @@ h6 { font-size: 16px; }
     -moz-box-shadow: none;
     box-shadow: none;
 }
+
 #dark-mode-border:hover {
     border-width: 2px;
 }
 
 #light-mode { background-color: white; }
 #dark-mode { background-color: #192734; }
-#matrix-mode { background-color: #78866b; }
+#matrix-mode { background-color: black; }
 #purple-mode { background-color: #7E4C74; }
+
+#pixel {
+    background-color: #00ff0f;
+    width: 10px;
+    height: 10px;
+    margin: 0 auto;
+    top: 33%;
+    position: relative;
+}
 
 #settings-note {
     font-size: 12px;
@@ -239,7 +240,7 @@ h6 { font-size: 16px; }
 .corner {
     width: 7px;
     height: 7px;
-    border-radius: 50%;
+    border-radius: var(--roundEdge);
     border: 1.5px solid #17a2b8;
     background-color: white;
     position: absolute;

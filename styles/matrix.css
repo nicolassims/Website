@@ -8,6 +8,7 @@
     --previewBg: rgba(0, 136, 8, 0.80);
     --previewShadow: #00ff0f;
     --buttonColor: #00ff0f;
+    --roundEdge: 0;
 }
 
 #preview-shadow {
@@ -23,7 +24,6 @@
 }
 
 .corner {
-    border-radius: 0;
     border: 1.5px solid black;
     background-color: #00ff0f;
 }
@@ -42,4 +42,8 @@
 
 #skills li {
     color: black;
+}
+
+.intro-wrapper {
+    border-radius: 0;
 }
