@@ -177,7 +177,7 @@
     <section class="s2">
         <div class="main-container">
             <h3 style="text-align: center;">Send an email!</h3>
-            <form id="contact-form">
+            <form method="post" name="contact-form" action="http://freudiancreations.website/contact.php" id="contact-form">
                 <label>Name</label>
                 <input class="input-field" type="text" name="name" />
                 <label>Subject</label>
@@ -186,7 +186,7 @@
                 <input class="input-field" type="text" name="email" />
                 <label>Message</label>
                 <textarea class="input-field" name="message"></textarea>
-                <input id="submit-btn" type="submit" value="Send" />
+                <input id="submit-btn" type="submit" value="Submit" />
             </form>
         </div>
     </section>
