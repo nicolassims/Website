@@ -1,0 +1,2 @@
+Move contact.php on vultr server into freudiancreations.website folder, refer to it in html.
+index.html might need to become index.php.

@@ -1,5 +1,19 @@
 <?php
 
+if (isset($_POST['submit'])) {
+	$name = $_POST['name'];
+	$subject = $_POST['subject'];
+	$mailFrom = $_POST['email'];
+	$message = $_POST['message'];
+
+	$mailTo = "neskarayakaylar@freudiancreations.website"//get around emails being blocked by google
+	$headers = "From: ".$mailFrom;
+	$txt = "You have received an email from ".$name.".\n\n".$message;
+
+	mail($mailTo, $subject, $txt, $headers);
+}
+
+/*
 $errors = "";
 $myemail = 'neskarayakaylar@gmail.com';
 
@@ -32,8 +46,8 @@ mail($to,$email_subject,$email_body,$headers);
 
 //redirect to the 'thank you' page
 
-/*header('Location: contact-form-thank-you.html');*/
+//header('Location: contact-form-thank-you.html');
 
-}
+}*/
 
 ?>
