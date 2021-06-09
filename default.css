@@ -200,7 +200,16 @@ h6 { font-size: 16px; }
 #light-mode { background-color: white; }
 #dark-mode { background-color: #192734; }
 #matrix-mode { background-color: black; }
-#paper-mode { background-color: #C7A575; }
+#paper-mode {
+    text-align: center;
+    background-color: #C7A575; 
+}
+
+#paper-mode h4 {
+    color: var(--themeDotBorder);
+    position: relative;
+    top: -34px;
+}
 
 #pixel {
     background-color: #00ff0f;
