@@ -9,6 +9,7 @@
     --previewShadow: #00ff0f;
     --buttonColor: #00ff0f;
     --roundEdge: 0;
+    --inverted: invert(43%) sepia(25%) saturate(4125%) hue-rotate(99deg) brightness(137%) contrast(113%);
 }
 
 #preview-shadow {
