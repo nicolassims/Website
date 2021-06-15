@@ -84,6 +84,7 @@ h1, h2, h3, h4, h5 {
     -webkit-transform: scale(3);
     transform: scale(3);
     filter: drop-shadow(0 0 5px rgb(0, 0, 0));
+    z-index: 100;
 }
 
 #back-link {

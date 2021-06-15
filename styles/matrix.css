@@ -45,10 +45,23 @@
     color: black;
 }
 
+.banner {
+    border-radius: 0;
+}
+
+
 .intro-wrapper {
     border-radius: 0;
 }
 
 #contact-form {
+    border-radius: 0;
+}
+
+#vertical-line {
+    border-radius: 0;
+}
+
+.gallery-wrapper img {
     border-radius: 0;
 }
