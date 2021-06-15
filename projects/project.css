@@ -57,6 +57,30 @@ h4 {
     font-family: var(--secondaryFont);
 }
 
+.gallery-wrapper {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    padding: 10px 0;
+    grid-gap: 20px;
+    width: 100%;
+}
+
+.gallery-wrapper img {
+    transition: transform 0.25s ease;
+    max-width: 300px;
+    height: auto;
+}
+
+.enlarged {
+    position: fixed;
+    top: 30%;
+    left: 37.5%;
+    -webkit-transform: scale(2.5);
+    max-width: 500px;
+    transform: scale(2.5);
+    filter: drop-shadow(0 0 5px rgb(0, 0, 0));
+}
+
 #back-link {
     padding-right: 20px;
 }
