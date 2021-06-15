@@ -2,7 +2,7 @@ h1, h2, h3, h4, h5 {
     margin: 0;
 }
 
-h4 {
+.subtitle {
     font-family: var(--secondaryFont);
 }
 
@@ -59,25 +59,30 @@ h4 {
 
 .gallery-wrapper {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     padding: 10px 0;
     grid-gap: 20px;
     width: 100%;
 }
 
 .gallery-wrapper img {
+    border: solid 2px var(--themeDotBorder);
+    border-radius: 5px;
     transition: transform 0.25s ease;
-    max-width: 300px;
-    height: auto;
+    height: 200px;
+    width: auto;
+    margin: 0 auto;
+    -webkit-box-shadow: -3px 3px 5px -3px rgba(0,0,0,0.75);
+    -moz-box-shadow: -3px 3px 5px -3px rgba(0,0,0,0.75);
+    box-shadow: -3px 3px 5px -3px rgba(0,0,0,0.75);
 }
 
 .enlarged {
     position: fixed;
-    top: 30%;
-    left: 37.5%;
-    -webkit-transform: scale(2.5);
-    max-width: 500px;
-    transform: scale(2.5);
+    top: 35%;
+    left: 40%;
+    -webkit-transform: scale(3);
+    transform: scale(3);
     filter: drop-shadow(0 0 5px rgb(0, 0, 0));
 }
 

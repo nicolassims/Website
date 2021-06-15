@@ -17,6 +17,11 @@ for (var i = 0; i < imagelist.length; i++) {
     })
 }
 
+let pw = document.querySelector('.gallery-wrapper');//get the gallery-wrapper element, which is the parent of all the posts...
+for (var i = pw.children.length; i >= 0; i--) {//look through every child in the post-wrapper, then...
+    pw.appendChild(pw.children[Math.random() * i | 0]);//append that child in a new order.
+}
+
 setInterval(function () {
     var ele = document.getElementById('blinker');
     ele.style.visibility = (ele.style.visibility == 'hidden' ? '' : 'hidden');
