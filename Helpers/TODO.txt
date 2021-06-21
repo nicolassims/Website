@@ -1,3 +1,4 @@
 Add Rhodes Island Experiences page.
 Figure out how to hide filepaths.
 Figure out how to make page https.
+Remove hedging of writer ability on website.
