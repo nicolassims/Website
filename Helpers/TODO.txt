@@ -1,3 +1,4 @@
 Add Rhodes Island Experiences page.
 Figure out how to make page https.
 Handle images zooming in weirdly on different layouts.
+Update Monster Crown logo.
