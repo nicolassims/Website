@@ -77,9 +77,11 @@ h1, h2, h3, h4, h5 {
 
 .enlarged {
     background-color: white;
-    position: fixed;
-    top: 35%;
-    left: 40%;
+    position: absolute;
+    top: 210%;
+    margin: auto;
+    left: 0;
+    right: 0;
     -webkit-transform: scale(3);
     transform: scale(3);
     filter: drop-shadow(0 0 5px rgb(0, 0, 0));
