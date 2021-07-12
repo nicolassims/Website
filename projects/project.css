@@ -64,6 +64,7 @@ h1, h2, h3, h4, h5 {
 }
 
 .gallery-wrapper img {
+    overflow: auto;
     border: solid 2px var(--themeDotBorder);
     border-radius: 5px;
     transition: transform 0.25s ease;
