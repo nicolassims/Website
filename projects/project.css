@@ -64,7 +64,7 @@ h1, h2, h3, h4, h5 {
 }
 
 .gallery-wrapper img {
-    overflow: auto;
+    overflow: hidden;
     border: solid 2px var(--themeDotBorder);
     border-radius: 5px;
     transition: transform 0.25s ease;
@@ -81,12 +81,8 @@ h1, h2, h3, h4, h5 {
     position: fixed;
     top: 50%;
     left: 50%;
-    -webkit-transform: translate(-50%, -50%) scale(3);
-    -ms-transform: translate(-50%, -50%) scale(3);
-    -webkit-transform: translate(-50%, -50%) scale(3);
-    -moz-transform: translate(-50%, -50%) scale(3);
-    -o-transform: translate(-50%, -50%) scale(3);
-    transform: translate(-50%, -50%) scale(3);
+    -webkit-transform: translate3d(-50%,-50%,0) scale(3);
+    transform: translate3d(-50%,-50%,0) scale(3);
     filter: drop-shadow(0 0 5px rgb(0, 0, 0));
     z-index: 100;
 }
