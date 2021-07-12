@@ -1,3 +1,3 @@
 Add Rhodes Island Experiences page.
 Figure out how to make page https.
-Handle images zooming in weirdly on different layouts.
+Make taller images zoom in correctly.
