@@ -71,18 +71,16 @@ h1, h2, h3, h4, h5 {
     height: 200px;
     width: auto;
     margin: 0 auto;
-    -webkit-box-shadow: -3px 3px 5px -3px rgba(0,0,0,0.75);
-    -moz-box-shadow: -3px 3px 5px -3px rgba(0,0,0,0.75);
     box-shadow: -3px 3px 5px -3px rgba(0,0,0,0.75);
 }
 
 .enlarged {
     background-color: white;
-    position: absolute;
-    left: 50%;
-    transform: translate(-50%, 45%) scale(3);
-    width: 30%;
-    filter: drop-shadow(0 0 5px rgb(0, 0, 0));
+    position: fixed;
+    top: 37.5%;
+    left: 37.5%;
+    transform-origin: center;
+    transform: scale(3);
     z-index: 100;
 }
 
