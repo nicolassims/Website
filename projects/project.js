@@ -28,9 +28,10 @@ for (var i = 0; i < imagelist.length; i++) {
     imagelist[i].addEventListener('click', function () {
         var modal = document.getElementById("myModal");
         var modalImg = document.getElementById("modal-container");
+        var captionText = document.getElementById("caption");
+        captionText.innerHTML = this.title;
         modal.style.display = "block";
         modalImg.src = this.src;
-        modalImg.title = this.title;
     })
 }
 
