@@ -109,12 +109,13 @@ h1, h2, h3, h4, h5 {
 }
 
 #caption {
+    font-family: var(--secondaryFont);
+    color: var(--secondaryText);
     margin: auto;
     display: block;
     width: 80%;
     max-width: 700px;
     text-align: center;
-    color: #ccc;
     padding: 10px 0;
     height: 150px;
 }
