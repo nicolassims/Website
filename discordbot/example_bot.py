@@ -2,7 +2,6 @@ import pyperclip
 import json
 import discord
 from datetime import datetime
-from discord import app_commands, DMChannel
 from discord.ext import commands
 from discord.utils import get
 
@@ -13,7 +12,7 @@ intents.message_content = True
 bot = commands.Bot('!', intents=intents)
 
 @bot.command()
-@app_commands.checks.has_permissions(administrator=True)
+@discord.app_commands.checks.has_permissions(administrator=True)
 async def credits(ctx):
     if (str(ctx.author) != "draymonddarksteel"):
         return
@@ -134,7 +133,7 @@ async def getcount(ctx):
 
 @bot.command()
 async def checkvote(ctx):
-    if (not (ctx.channel is DMChannel or str(ctx.channel.name) in ["superadminchannel", "bots"])):
+    if (not (ctx.channel.type is discord.ChannelType.private or str(ctx.channel.name) in ["superadminchannel", "bots"])):
         correctchannel = bot.get_channel(1089705891265261598).mention
         await ctx.send("This isn't the right channel for this! Please go into " + correctchannel + ".")
         return
