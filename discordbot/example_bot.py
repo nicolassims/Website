@@ -1,4 +1,3 @@
-import pyperclip
 import json
 import discord
 from datetime import datetime
@@ -33,8 +32,7 @@ async def credits(ctx):
             fullstring += quotemark + username + quotemark + ", "
         fullstring = fullstring[:-2] + "]\n" + eight + 'vbox:' + "\n" + twelve + 'text "' + rolestring + 's" size 80 color "#fff"\n' + twelve + 'for name in ' + listname + 's:\n' + sixteen + 'text name size 40 color "#fff"\n\n'
 
-    pyperclip.copy(fullstring)
-    await ctx.send("Credits copied to clipboard")
+    await ctx.send(fullstring)
 
 #@bot.event
 #async def on_message(message):
