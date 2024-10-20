@@ -35,7 +35,6 @@ async def credits(ctx):
 
     pyperclip.copy(fullstring)
     await ctx.send("Credits copied to clipboard")
-    print("Credits copied to clipboard")
 
 #@bot.event
 #async def on_message(message):
@@ -127,7 +126,6 @@ async def getcount(ctx):
         pollstring += str(value) + " - " + key  + "\n"
     pollstring += "```"
 
-    print(pollstring)
     await ctx.send(pollstring)
 
 @bot.command()
