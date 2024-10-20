@@ -12,7 +12,6 @@ intents.message_content = True
 bot = commands.Bot('!', intents=intents)
 
 @bot.command()
-@discord.app_commands.checks.has_permissions(administrator=True)
 async def credits(ctx):
     if (str(ctx.author) != "draymonddarksteel"):
         return
@@ -89,7 +88,7 @@ async def poll(ctx):
     
 
     # Poll data
-    with open('.\\databases\\poll.json', 'r') as poll_file:
+    with open('./databases/poll.json', 'r') as poll_file:
         poll_data = {}
         messageids = []
         for embed in [embed1, embed2, embed3]:
@@ -102,7 +101,7 @@ async def poll(ctx):
         poll_dictionary = { "messageids" : messageids, "votes" : {} }
         poll_data[messageids[0]] = poll_dictionary
 
-        with open('.\\databases\\poll.json', 'w') as new_poll_data:
+        with open('./databases/poll.json', 'w') as new_poll_data:
             json.dump(poll_data, new_poll_data, indent=4)
 
 @bot.command()
@@ -110,7 +109,7 @@ async def getcount(ctx):
     if (str(ctx.author) != "draymonddarksteel"):
         return
     
-    polldata = json.load(open('.\\databases\\poll.json', 'r'))
+    polldata = json.load(open('./databases/poll.json', 'r'))
     polldata = list(polldata.values())[0]["votes"]
 
     totalvotes = {}
@@ -138,7 +137,7 @@ async def checkvote(ctx):
         await ctx.send("This isn't the right channel for this! Please go into " + correctchannel + ".")
         return
     
-    polldata = json.load(open('.\\databases\\poll.json', 'r'))
+    polldata = json.load(open('./databases/poll.json', 'r'))
     polldata = list(polldata.values())[0]["votes"]
 
     pollstring = "```"
@@ -169,11 +168,11 @@ async def checkvote(ctx):
 async def on_raw_reaction_add(payload):
     member = payload.member
     memberid = member.id
-    myid = bot.user.id
-    if (payload.message_author_id == myid and memberid != myid):
+    myid = bot.user.id#palf-discussion, announcements, superadminchannel
+    if (payload.channel_id in [1082467211291148351, 1092807840256766012, 1153733706821935125] and memberid != myid):
         channel = bot.get_channel(payload.channel_id)
         message = await channel.fetch_message(payload.message_id)
-        polldata = json.load(open('.\\databases\\poll.json', 'r'))
+        polldata = json.load(open('./databases/poll.json', 'r'))
         pollids = []
         mastermessageid = ""
         voteindex = 3
@@ -231,7 +230,7 @@ async def on_raw_reaction_add(payload):
             channel = await member.create_dm()
             await channel.send(content)
         
-        with open('.\\databases\\poll.json', 'w') as update_poll_data:
+        with open('./databases/poll.json', 'w') as update_poll_data:
             json.dump(polldata, update_poll_data, indent=4)
                 
             
