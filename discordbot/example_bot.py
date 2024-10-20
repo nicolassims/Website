@@ -13,7 +13,7 @@ bot = commands.Bot('!', intents=intents)
 
 @bot.command()
 async def credits(ctx):
-    if (str(ctx.author) != "draymonddarksteel"):
+    if (str(ctx.author) != "draymonddarksteel#0"):
         return
 
     eight = "        "
