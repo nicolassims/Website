@@ -50,8 +50,8 @@ async def poll(ctx, *storylines):
     embed_titles = ["three", "two"] if num_storylines == 2 else ["three", "two", "one"]
     embeds = [
         discord.Embed(
-            title="Test Poll",
-            description=f"Pick a storyline to give {title} points to.",
+            title="Week 9 Poll",
+            description=f"Pick a storyline to give {title} point{("s" if title != "one" else "")} to.",
             colour=0xFF0000
         )
         for title in embed_titles
