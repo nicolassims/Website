@@ -1,8 +1,12 @@
 import json
 import discord
+import random
 from datetime import datetime
 from discord.ext import commands, tasks
 from discord.utils import get
+from asyncio import Lock
+
+lock = Lock()
 
 intents = discord.Intents.default()
 intents.members = True
@@ -12,6 +16,7 @@ bot = commands.Bot('!', intents=intents)
 
 polldata = {}
 activepollfile = ""
+questionlog = {}
 
 emojipairs = {
     "⚔️": "Rusted Swords",
@@ -176,14 +181,17 @@ async def checkvote(ctx):
 
 @bot.event
 async def on_ready():
-    await myLoop.start()
-
+    global questionlog
+    questionlog = json.loads(open('./databases/questionlog.json', 'r').read())
+    await dumppolldata.start()
 
 @tasks.loop(seconds = 10) # repeat after every 10 seconds
-async def myLoop():
+async def dumppolldata():
     global polldata
-    with open(activepollfile, 'w') as new_polldata:
-        json.dump(polldata, new_polldata, indent=4)
+
+    async with lock:
+        with open(activepollfile, 'w') as new_polldata:
+            json.dump(polldata, new_polldata, indent=4)
 
 @bot.event
 async def on_raw_reaction_add(payload):
@@ -225,9 +233,7 @@ async def on_raw_reaction_add(payload):
 
             if emoji not in emojipairs:
                 await message.remove_reaction(payload.emoji, member)
-                #content = "Oops! That's not a valid option. Please try again with a listed emoji."
             else:
-                #content = ""
                 storylinename = emojipairs[emoji]
                 await message.remove_reaction(payload.emoji, member)
 
@@ -238,21 +244,63 @@ async def on_raw_reaction_add(payload):
                     elif '1' in myvotes and myvotes['1'] == storylinename:
                         preindex = 1
                     del myvotes[str(preindex)]
-                    #content += f"Removed your {preindex}-point vote for {storylinename}. "
 
                 myvotes[votestr] = storylinename
-                #content += f"Your {votestr}-point vote for {storylinename} has been recorded."
 
-                # Adjust reminders based on `point_levels`
-                #    content += " Please assign a 3-point vote to a storyline."
-                #if "2" not in myvotes:
-                #    content += " Please assign a 2-point vote to a storyline."
-                #if point_levels == 3 and "1" not in myvotes:
-                #    content += " Please assign a 1-point vote to a storyline."
-                #el
+                content += " Please assign a 1-point vote to a storyline."
                 if all(str(i) in myvotes for i in range(4 - point_levels, 4)):
-                    #content += 
                     channel = await member.create_dm()
                     await channel.send("Voting is complete! Thank you for your input.")
+
+@bot.event
+async def on_message(message):
+
+    await limit_questions(message)
+
+
+    #if (message.author == self):
+    #    return
+
+    #if message.content.startswith('$greet'):
+    #    channel = message.channel
+    #    await channel.send('Say hello!')
+    #
+    #    def check(m):
+    #        return m.content == 'hello' and m.channel == channel
+    #
+    #    msg = await client.wait_for('message', check=check)
+    #    await channel.send(f'Hello {msg.author}!')
+
+    await bot.process_commands(message)
+
+async def limit_questions(message):
+    global questionlog
+
+    if ("draymonddarksteel" in message.author.name):
+        if (message.reference):
+            questionlog[message.reference.author.id][4] = True#4 is the 'true' parameter
+            with open('./databases/questionlog.json', 'w') as new_questiondata:
+                json.dump(questionlog, new_questiondata, indent=4)
+                return
+    
+    #if (message.channel != 1082467211291148357 or message.author.bot or discord.utils.find(lambda r: r.name == 'Professor', message.guild.roles) in message.author.roles):
+    #    return
+    
+    if (message.author.id not in questionlog):
+        questionlog[message.author.id] = [message.created_at.year, message.created_at.month, message.created_at.day, message.id, False]
+        with open('./databases/questionlog.json', 'w') as new_questiondata:
+            json.dump(questionlog, new_questiondata, indent=4)
+    else:
+        if ("draymonddarksteel" in message.author.name):
+            year, month, day, id, responded = questionlog[message.author.id]
+            original_message = await message.channel.fetch_message(id)
+            flavor1 = random.choice(["Woah there, partner!", "Hold your horses!", "Hold on, buddy!", "Not so fast!", "Halt your actions!", "Stay thine hand!", "Sore wa chigau yo!", "Objection!", "Really? Right in front of my salad?", "Heaven or hell! Let's rock!", "Pray forgive the discourtesy, but you must be informed!", "Rulebreaker?!", "1,000 years dungeon!", "Be admonished!", "Abandon your course!", "psssh...nothin personnel...kid...", "Did someone just diddly-dang double post in this goddang dev-questions server?", "That's a paddlin'.", "Right to jail!", "I've come to make an announcement:", "THIS COMMUNICATION IS NOT TOLERATED.", "¿Dos preguntas? ¿En esta economía?", "I sense heresy here...", "Never gonna give you up, but you better give up on asking that question!", "HEY KIDS WANNA SEE A DEAD BODY?!", "Yaaaamerrroooo! YAAAAMMMMEEERRRROOOO!", "Death is not a hunter unbeknownst to its prey... but this question's gotta be unbeknownst to you.", "The #dev-questions is the means by which all is revealed... but not _this_ question!", "I'm so goddamn tired."])
+            if (message.created_at.day == day and message.created_at.month == month and message.created_at.year == year):
+                flavor2 = random.choice(["Looks like you've already asked a question in this channel today.", "You can only ask one question in this channel a day!", "Freud needs time to work on the actual game, and the moderators need time to moderate! Please keep your questions limited to one a day.", "Two questions in a day... isn't that a bit much?", "A thirst for knowledge is admirable, but give Freud and the devs some time to work on, you know, the _actual_ game!", "Freud and the devs love answering questions--really--but there can be too much of a good thing! Try to ask just one question a day, okay?", "If I had the time, I'd sit in front of #dev-questions and answer all these questions, non-stop. But I gotta spend _some_ time on the game you're ostensibly here for.", "Unlike Leaf, I'm a pretty good swimmer, but even I can drown in questions! Try to limit it to one a day, okay?", "Love the enthusiasm, but Freud and the devs have limited time, and they spend _most_ of it on the actual game, not #dev-questions. Mind limiting your question-rate to one per day?"])
+                await message.reply(flavor1 + " " + flavor2 + " Your previous question is here: " + original_message.jump_url)
+
+            elif (not responded):
+                flavor2 = random.choice(["Looks like Freud hasn't responded to your previous question yet!", "Sorry to make you wait, but Freud hasn't gotten to your previous question, yet.", "Please give Freud a little more time to respond to your previous question!", "Sorry, but Freud fell in a ditch somewhere, and hasn't gotten around to answering your question yet. Give him a bit!", "A thirst for knowledge is admirable, but give Freud some time to answer your first question before you come in asking about another one!", "Freud and the devs love answering questions--really--but there can be too much of a good thing! Give Freud some time to answer your first question before asking another!", "If I had the time, I'd sit in front of #dev-questions and answer all these questions, non-stop. But I gotta spend _some_ time on the game you're ostensibly here for, and that's why I haven't been able to respond to your previous question yet!", "Unlike :leaf:, I'm a pretty good swimmer, but I even I can drown in questions! Please wait for me to surface before pouring _more_ water over me!"])
+                await message.reply(flavor1 + " " + flavor2 + " Your previous question is here: " + original_message.jump_url)
 
 bot.run('Token')
