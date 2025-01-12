@@ -11,6 +11,7 @@ intents.message_content = True
 bot = commands.Bot('!', intents=intents)
 
 polldata = {}
+activepollfile = ""
 
 emojipairs = {
     "⚔️": "Rusted Swords",
@@ -25,9 +26,39 @@ emojipairs = {
 namepairs = {v: k for k, v in emojipairs.items()}
 
 @bot.command()
-async def poll(ctx, *storylines):
-    global polldata
+async def credits(ctx):
     if (str(ctx.author) not in ["draymonddarksteel#0", "draymonddarksteel"]):
+        return
+
+    eight = "        "
+    twelve = "            "
+    sixteen = "                "
+    fullstring = ""
+    rolestrings = ["Teaching Assistant", "Top Student", "Commissioner"]
+    for rolestring in rolestrings:
+        role = get(ctx.guild.roles, name=rolestring)
+        listname = role.name.lower().replace(" ", "")
+        fullstring += eight + "$ " + listname + "s = ["
+        for mem in role.members:
+            username = (mem.nick if mem.nick != None else str(mem))
+            if ("[" in username):
+                username = username.replace("[", "[[")
+            quotemark = ('"' if "'" in username else '"')
+            fullstring += quotemark + username + quotemark + ", "
+        fullstring = fullstring[:-2] + "]\n" + eight + 'vbox:' + "\n" + twelve + 'text "' + rolestring + 's" size 80 color "#fff"\n' + twelve + 'for name in ' + listname + 's:\n' + sixteen + 'text name size 40 color "#fff"\n\n'
+        await ctx.send("```" + fullstring + "```")
+        fullstring = ""
+
+@bot.command()
+async def poll(ctx, pollname = "Default Name Poll", *storylines):
+    global polldata
+    global activepollfile
+
+    if (str(ctx.author) not in ["draymonddarksteel#0", "draymonddarksteel"]):
+        return
+    
+    if not pollname:
+        await ctx.send("You must provide a name for the poll.")
         return
 
     # Filter storylines to the specified ones, or use all if none specified
@@ -50,7 +81,7 @@ async def poll(ctx, *storylines):
     embed_titles = ["three", "two"] if num_storylines == 2 else ["three", "two", "one"]
     embeds = [
         discord.Embed(
-            title="Week 9 Poll",
+            title=pollname,
             description=f"Pick a storyline to give {title} point{("s" if title != "one" else "")} to.",
             colour=0xFF0000
         )
@@ -58,12 +89,18 @@ async def poll(ctx, *storylines):
     ]
 
     # Populate each embed with the chosen storylines
-    for embed in embeds:
-        for key, value in chosen_emojipairs.items():
-            embed.add_field(name="**" + value + "** - " + key, value="", inline=True)
+    #for embed in embeds:
+    for key, value in chosen_emojipairs.items():
+        embeds[0].add_field(name="**" + value + "** - " + key, value="", inline=True)
+
+    activepollfile = './databases/poll' + pollname.replace(" ", "").lower() + '.json'
+
+    with open(activepollfile, 'w') as file:
+        file.write('{}')
+        file.close()
 
     # Sending poll embeds with reactions
-    with open('./databases/poll.json', 'r'):
+    with open(activepollfile, 'r'):
         polldata = {}
         messageids = []
         for embed in embeds:
@@ -75,7 +112,7 @@ async def poll(ctx, *storylines):
         poll_dictionary = {"messageids": messageids, "votes": {}, "point_levels": len(embed_titles)}
         polldata[messageids[0]] = poll_dictionary
 
-        with open('./databases/poll.json', 'w') as new_polldata:
+        with open(activepollfile, 'w') as new_polldata:
             json.dump(polldata, new_polldata, indent=4)
 
 @bot.command()
@@ -84,7 +121,7 @@ async def getcount(ctx):
     if (str(ctx.author) not in ["draymonddarksteel#0", "draymonddarksteel"]):
         return
 
-    with open('./databases/poll.json', 'w') as update_polldata:
+    with open(activepollfile, 'w') as update_polldata:
         json.dump(polldata, update_polldata, indent=4)
 
     voteslist = list(polldata.values())[0]["votes"]
@@ -145,7 +182,7 @@ async def on_ready():
 @tasks.loop(seconds = 10) # repeat after every 10 seconds
 async def myLoop():
     global polldata
-    with open('./databases/poll.json', 'w') as new_polldata:
+    with open(activepollfile, 'w') as new_polldata:
         json.dump(polldata, new_polldata, indent=4)
 
 @bot.event
@@ -188,9 +225,9 @@ async def on_raw_reaction_add(payload):
 
             if emoji not in emojipairs:
                 await message.remove_reaction(payload.emoji, member)
-                content = "Oops! That's not a valid option. Please try again with a listed emoji."
+                #content = "Oops! That's not a valid option. Please try again with a listed emoji."
             else:
-                content = ""
+                #content = ""
                 storylinename = emojipairs[emoji]
                 await message.remove_reaction(payload.emoji, member)
 
@@ -201,21 +238,21 @@ async def on_raw_reaction_add(payload):
                     elif '1' in myvotes and myvotes['1'] == storylinename:
                         preindex = 1
                     del myvotes[str(preindex)]
-                    content += f"Removed your {preindex}-point vote for {storylinename}. "
+                    #content += f"Removed your {preindex}-point vote for {storylinename}. "
 
                 myvotes[votestr] = storylinename
-                content += f"Your {votestr}-point vote for {storylinename} has been recorded."
+                #content += f"Your {votestr}-point vote for {storylinename} has been recorded."
 
                 # Adjust reminders based on `point_levels`
-                if "3" not in myvotes:
-                    content += " Please assign a 3-point vote to a storyline."
-                if "2" not in myvotes:
-                    content += " Please assign a 2-point vote to a storyline."
-                if point_levels == 3 and "1" not in myvotes:
-                    content += " Please assign a 1-point vote to a storyline."
-                elif all(str(i) in myvotes for i in range(4 - point_levels, 4)):
-                    content += " Voting is complete! Thank you for your input."
+                #    content += " Please assign a 3-point vote to a storyline."
+                #if "2" not in myvotes:
+                #    content += " Please assign a 2-point vote to a storyline."
+                #if point_levels == 3 and "1" not in myvotes:
+                #    content += " Please assign a 1-point vote to a storyline."
+                #el
+                if all(str(i) in myvotes for i in range(4 - point_levels, 4)):
+                    #content += 
+                    channel = await member.create_dm()
+                    await channel.send("Voting is complete! Thank you for your input.")
 
-            channel = await member.create_dm()
-            await channel.send(content)
 bot.run('Token')
