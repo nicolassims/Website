@@ -261,6 +261,7 @@ async def on_message(message):
 async def limit_questions(message):
     global questionlog
 
+    print(message.author.name)
     if ("draymonddarksteel" in message.author.name):
         if (message.reference and message.reference.cached_message):
             questionlog[message.reference.cached_message.author.id][4] = True#4 is the 'true' parameter
