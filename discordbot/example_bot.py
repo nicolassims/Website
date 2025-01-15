@@ -262,13 +262,13 @@ async def limit_questions(message):
     global questionlog
 
     if ("draymonddarksteel" in message.author.name):
-        if (message.reference and message.reference.cached_message):
+        if (message.reference and message.reference.cached_message and message.reference.cached_message.author.id in questionlog):
             questionlog[message.reference.cached_message.author.id][4] = True#4 is the 'true' parameter
             with open('./databases/questionlog.json', 'w') as new_questiondata:
                 json.dump(questionlog, new_questiondata, indent=4)
         return
 
-    if (message.channel.name not in ["superadminchannel", "dev-questions"] or message.author.bot or discord.utils.find(lambda r: r.name == 'Professor', message.guild.roles) in message.author.roles):
+    if (message.channel.name not in ["superadminchannel", "dev-questions"] or message.author.bot or discord.utils.find(lambda r: r.name == 'Professor', message.guild.roles) in message.author.roles or "maslina" in message.author.name):
         return
 
     if (message.author.id not in questionlog):
