@@ -262,13 +262,15 @@ async def limit_questions(message):
     global questionlog
 
     if ("draymonddarksteel" in message.author.name):
-        if (message.reference and message.reference.cached_message and message.reference.cached_message.author.id in questionlog):
-            questionlog[message.reference.cached_message.author.id][4] = True#4 is the 'true' parameter
-            with open('./databases/questionlog.json', 'w') as new_questiondata:
-                json.dump(questionlog, new_questiondata, indent=4)
+        if (message.reference and message.reference.message_id):
+            old_message = await message.channel.fetch_message(message.reference.message_id)
+            if (old_message.author.id in questionlog):
+                questionlog[old_message.author.id][4] = True#4 is the 'true' parameter
+                with open('./databases/questionlog.json', 'w') as new_questiondata:
+                    json.dump(questionlog, new_questiondata, indent=4)
         return
 
-    if (message.channel.name not in ["superadminchannel", "dev-questions"] or message.author.bot or discord.utils.find(lambda r: r.name == 'Professor', message.guild.roles) in message.author.roles or "maslina" in message.author.name):
+    if (message.channel.name not in ["superadminchannel", "dev-questions"] or message.author.bot or discord.utils.find(lambda r: r.name == 'Professor', message.guild.roles) in message.author.roles or "maslina8" in message.author.name or "mmcc_94868" in message.author.name):
         return
 
     if (message.author.id not in questionlog):
@@ -278,12 +280,12 @@ async def limit_questions(message):
     else:
         year, month, day, id, responded = questionlog[message.author.id]
         original_message = await message.channel.fetch_message(id)
-        flavor1 = random.choice(["Woah there, partner!", "Hold your horses!", "Hold on, buddy!", "Not so fast!", "Halt your actions!", "Stay thine hand!", "Sore wa chigau yo!", "Objection!", "Really? Right in front of my salad?", "Heaven or hell! Let's rock!", "Pray forgive the discourtesy, but you must be informed!", "Rulebreaker?!", "1,000 years dungeon!", "Be admonished!", "Abandon your course!", "psssh...nothin personnel...kid...", "Did someone just diddly-dang double post in this goddang dev-questions server?", "That's a paddlin'.", "Right to jail!", "I've come to make an announcement:", "THIS COMMUNICATION IS NOT TOLERATED.", "¿Dos preguntas? ¿En esta economía?", "I sense heresy here...", "Never gonna give you up, but you better give up on asking that question!", "HEY KIDS WANNA SEE A DEAD BODY?!", "Yaaaamerrroooo! YAAAAMMMMEEERRRROOOO!", "Death is not a hunter unbeknownst to its prey... but this question's gotta be unbeknownst to you.", "The #dev-questions is the means by which all is revealed... but not _this_ question!", "I'm so goddamn tired."])
+        flavor1 = random.choice(["Woah there, partner!", "Hold your horses!", "Hold on, buddy!", "Not so fast!", "Halt your actions!", "Stay thine hand!", "Sore wa chigau yo!", "Objection!", "Really? Right in front of my salad?", "Heaven or hell! Let's rock!", "Pray forgive the discourtesy, but you must be informed!", "Rulebreaker?!", "1,000 years dungeon!", "Be admonished!", "Abandon your course!", "psssh...nothin personnel...kid...", "Did someone just diddly-dang double post in this goddang dev-questions server?", "That's a paddlin'.", "Right to jail!", "I've come to make an announcement:", "THIS COMMUNICATION IS NOT TOLERATED.", "¿Dos preguntas? ¿En esta economía?", "I sense heresy here...", "Never gonna give you up, but you better give up on asking that question!", "HEY KIDS WANNA SEE A DEAD BODY?!", "Yaaaamerrroooo! YAAAAMMMMEEERRRROOOO!", "Death is not a hunter unbeknownst to its prey... but this question's gotta be unbeknownst to you.", "The #dev-questions is the means by which all is revealed... but not _this_ question!", "I'm so goddamn tired.", "//FIX THIS: INSERT FUNNY QUOTE", "Keep doing that and I'll tell you about Homestuck.", "Assuming direct control.", "This hurts you.", "This kills the questioner.", "Allowance must be made for those who, without concluding, continue questioning."])
         if (message.created_at.day == day and message.created_at.month == month and message.created_at.year == year):
             flavor2 = random.choice(["Looks like you've already asked a question in this channel today.", "You can only ask one question in this channel a day!", "Freud needs time to work on the actual game, and the moderators need time to moderate! Please keep your questions limited to one a day.", "Two questions in a day... isn't that a bit much?", "A thirst for knowledge is admirable, but give Freud and the devs some time to work on, you know, the _actual_ game!", "Freud and the devs love answering questions--really--but there can be too much of a good thing! Try to ask just one question a day, okay?", "If I had the time, I'd sit in front of #dev-questions and answer all these questions, non-stop. But I gotta spend _some_ time on the game you're ostensibly here for.", "Unlike Leaf, I'm a pretty good swimmer, but even I can drown in questions! Try to limit it to one a day, okay?", "Love the enthusiasm, but Freud and the devs have limited time, and they spend _most_ of it on the actual game, not #dev-questions. Mind limiting your question-rate to one per day?"])
             await message.reply(flavor1 + " " + flavor2 + " Your previous question is here: " + original_message.jump_url)
 
-        elif (not responded):
+        elif (not responded and not original_message.id == message.id):
             flavor2 = random.choice(["Looks like Freud hasn't responded to your previous question yet!", "Sorry to make you wait, but Freud hasn't gotten to your previous question, yet.", "Please give Freud a little more time to respond to your previous question!", "Sorry, but Freud fell in a ditch somewhere, and hasn't gotten around to answering your question yet. Give him a bit!", "A thirst for knowledge is admirable, but give Freud some time to answer your first question before you come in asking about another one!", "Freud and the devs love answering questions--really--but there can be too much of a good thing! Give Freud some time to answer your first question before asking another!", "If I had the time, I'd sit in front of #dev-questions and answer all these questions, non-stop. But I gotta spend _some_ time on the game you're ostensibly here for, and that's why I haven't been able to respond to your previous question yet!", "Unlike Leaf, I'm a pretty good swimmer, but I even I can drown in questions! Please wait for me to surface before pouring _more_ water over me!"])
             await message.reply(flavor1 + " " + flavor2 + " Your previous question is here: " + original_message.jump_url)
 
