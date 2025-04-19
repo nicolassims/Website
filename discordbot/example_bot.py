@@ -50,6 +50,9 @@ async def credits(ctx):
                 username = username.replace("[", "[[")
             quotemark = ('"' if "'" in username else '"')
             fullstring += quotemark + username + quotemark + ", "
+            if (len(fullstring) > 1800):
+                await ctx.send("```" + fullstring + "```")
+                fullstring = ""
         fullstring = fullstring[:-2] + "]\n" + eight + 'vbox:' + "\n" + twelve + 'text "' + rolestring + 's" size 80 color "#fff"\n' + twelve + 'for name in ' + listname + 's:\n' + sixteen + 'text name size 40 color "#fff"\n\n'
         await ctx.send("```" + fullstring + "```")
         fullstring = ""
@@ -253,7 +256,6 @@ async def on_raw_reaction_add(payload):
 
 @bot.event
 async def on_message(message):
-
     await limit_questions(message)
 
     await bot.process_commands(message)
