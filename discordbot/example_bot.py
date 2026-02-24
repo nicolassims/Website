@@ -272,7 +272,7 @@ async def limit_questions(message):
                     json.dump(questionlog, new_questiondata, indent=4)
         return
 
-    if (message.channel.name not in ["superadminchannel", "dev-questions"] or message.author.bot or discord.utils.find(lambda r: r.name == 'Professor', message.guild.roles) in message.author.roles or "maslina8" in message.author.name or "mmcc_94868" in message.author.name):
+    if (message.channel.type is discord.ChannelType.private or message.channel.name not in ["superadminchannel", "dev-questions"] or message.author.bot or discord.utils.find(lambda r: r.name == 'Professor', message.guild.roles) in message.author.roles or "maslina8" in message.author.name or "mmcc_94868" in message.author.name):
         return
 
     if (message.author.id in questionlog):
